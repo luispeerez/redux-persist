@@ -105,7 +105,14 @@ export default function persistReducer<State: Object, Action: Object>(
       if (!_persistoid) _persistoid = createPersistoid(config)
 
       // @NOTE PERSIST can be called multiple times, noop after the first
-      if (_persist) return state
+      // Patch by https://github.com/rt2zz/redux-persist/issues/940
+      if (_persist) {
+        return {
+          ...baseReducer(restState, action),
+          _persist: { version, rehydrated: false },
+        }
+      }
+
       if (
         typeof action.rehydrate !== 'function' ||
         typeof action.register !== 'function'
