@@ -1,7 +1,7 @@
-es
-#TODO: Remove lib comment
+#TODO: Remove lib, es, and dist comment
+#es
 #lib
-dist
+#dist
 .watchmanconfig
 
 # Logs
